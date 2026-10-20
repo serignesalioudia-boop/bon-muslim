@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- prayer mat -->
+    <path
+        android:fillColor="#E8D5A0"
+        android:pathData="M20,105 L100,105 L95,110 L25,110 Z" />
+
+    <!-- head (bent forward) -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M38,38 m-9,0 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0" />
+
+    <!-- torso bent at ~90 degrees -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M38,47 L75,52 L75,64 L38,59 Z" />
+
+    <!-- arms reaching down to knees -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M72,52 L82,72 L78,74 L68,54 Z" />
+    <path
+        android:fillColor="#388E3C"
+        android:pathData="M70,54 L80,74 L76,76 L66,56 Z" />
+
+    <!-- legs straight -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M74,64 L78,104 L84,103 L80,64 Z" />
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M80,64 L84,104 L90,103 L86,64 Z" />
+</vector>

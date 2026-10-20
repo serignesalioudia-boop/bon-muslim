@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- prayer mat -->
+    <path
+        android:fillColor="#E8D5A0"
+        android:pathData="M15,100 L105,100 L100,110 L20,110 Z" />
+
+    <!-- head (forehead on ground) -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M25,88 m-9,0 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0" />
+
+    <!-- torso low to ground -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M25,92 L68,86 L70,96 L27,100 Z" />
+
+    <!-- arms flat on ground -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M30,90 L22,98 L26,100 L34,92 Z" />
+    <path
+        android:fillColor="#388E3C"
+        android:pathData="M28,88 L20,96 L24,98 L32,90 Z" />
+
+    <!-- knees on ground -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M68,86 L82,92 L80,100 L66,96 Z" />
+
+    <!-- feet with toes on ground -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M82,92 L98,96 L98,102 L80,100 Z" />
+</vector>

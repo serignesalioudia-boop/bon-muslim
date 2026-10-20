@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- prayer mat -->
+    <path
+        android:fillColor="#E8D5A0"
+        android:pathData="M20,100 L100,100 L95,110 L25,110 Z" />
+
+    <!-- person sitting in jalsa -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M60,22 m-9,0 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0" />
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M52,32 L68,32 L70,72 L50,72 Z" />
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M54,40 L42,64 L46,66 L58,42 Z" />
+    <path
+        android:fillColor="#388E3C"
+        android:pathData="M66,40 L78,64 L74,66 L62,42 Z" />
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M50,72 L30,95 L34,99 L54,76 Z" />
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M60,72 L70,95 L66,98 L56,75 Z" />
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M70,95 L78,97 L78,100 L68,99 Z" />
+
+    <!-- dua hands raised -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M52,34 L42,30 L40,33 L50,37 Z" />
+    <path
+        android:fillColor="#388E3C"
+        android:pathData="M68,34 L78,30 L80,33 L70,37 Z" />
+    <!-- palms up -->
+    <path
+        android:fillColor="#FFCC80"
+        android:pathData="M42,30 L36,24 L39,21 L44,27 Z" />
+    <path
+        android:fillColor="#FFCC80"
+        android:pathData="M78,30 L84,24 L81,21 L76,27 Z" />
+
+    <!-- rays -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M60,5 L62,12 L58,12 Z" />
+</vector>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- prayer mat -->
+    <path
+        android:fillColor="#E8D5A0"
+        android:pathData="M20,105 L100,105 L95,110 L25,110 Z" />
+
+    <!-- niyyah thought bubble -->
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M35,10 m-12,0 a12,12 0 1,0 24,0 a12,12 0 1,0 -24,0" />
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M50,20 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+    <!-- heart inside bubble -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M35,8 C33,5 29,5 29,9 C29,13 35,17 35,17 C35,17 41,13 41,9 C41,5 37,5 35,8 Z" />
+
+    <!-- head -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M60,22 m-9,0 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0" />
+
+    <!-- body -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M52,32 L68,32 L66,80 L54,80 Z" />
+
+    <!-- arms at sides -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M54,40 L48,70 L52,72 L58,42 Z" />
+    <path
+        android:fillColor="#388E3C"
+        android:pathData="M66,40 L72,70 L68,72 L62,42 Z" />
+
+    <!-- left leg -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M54,80 L50,104 L56,105 L60,80 Z" />
+
+    <!-- right leg -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M60,80 L64,105 L70,104 L66,80 Z" />
+</vector>

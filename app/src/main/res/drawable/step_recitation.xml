@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- prayer mat -->
+    <path
+        android:fillColor="#E8D5A0"
+        android:pathData="M20,105 L100,105 L95,110 L25,110 Z" />
+
+    <!-- head -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M60,22 m-9,0 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0" />
+
+    <!-- body -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M52,32 L68,32 L66,70 L54,70 Z" />
+
+    <!-- arms folded on chest -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M54,40 L44,44 L46,48 L56,44 Z" />
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M46,44 L66,38 L66,44 L46,48 Z" />
+    <path
+        android:fillColor="#388E3C"
+        android:pathData="M66,36 L76,42 L74,46 L64,40 Z" />
+
+    <!-- left leg -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M54,70 L50,104 L56,105 L60,70 Z" />
+
+    <!-- right leg -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M60,70 L64,105 L70,104 L66,70 Z" />
+
+    <!-- recitation waves from mouth -->
+    <path
+        android:fillColor="#81C784"
+        android:pathData="M56,28 C52,26 52,22 56,20" />
+    <path
+        android:fillColor="#81C784"
+        android:pathData="M54,30 C48,27 48,21 54,18" />
+</vector>

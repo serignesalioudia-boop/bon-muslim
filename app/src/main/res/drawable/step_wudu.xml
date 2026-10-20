@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- water basin -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M30,70 L90,70 L85,95 L35,95 Z" />
+    <path
+        android:fillColor="#29B6F6"
+        android:pathData="M33,73 L87,73 L83,92 L37,92 Z" />
+
+    <!-- hands washing -->
+    <path
+        android:fillColor="#FFCC80"
+        android:pathData="M48,40 L44,68 L52,68 L52,40 Z" />
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M56,40 L60,68 L68,68 L64,40 Z" />
+
+    <!-- water drops -->
+    <path
+        android:fillColor="#81D4FA"
+        android:pathData="M52,30 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
+    <path
+        android:fillColor="#81D4FA"
+        android:pathData="M62,25 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
+    <path
+        android:fillColor="#81D4FA"
+        android:pathData="M57,18 m-3,0 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" />
+
+    <!-- soap bubbles -->
+    <path
+        android:fillColor="#E1F5FE"
+        android:pathData="M40,35 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" />
+    <path
+        android:fillColor="#E1F5FE"
+        android:pathData="M70,30 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" />
+</vector>
