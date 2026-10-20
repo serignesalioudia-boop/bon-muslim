@@ -38,6 +38,7 @@ class PrayerTimesActivity : AppCompatActivity() {
     private val fusedClient by lazy { LocationServices.getFusedLocationProviderClient(this) }
     private val REQ_LOCATION = 1001
     private val REQ_NOTIF = 1003
+    private var lastLocation: Location? = null
 
     private val pickAdhan = registerForActivityResult(
         ActivityResultContracts.OpenDocument()
@@ -71,6 +72,7 @@ class PrayerTimesActivity : AppCompatActivity() {
         }
 
         setupAdhanSound()
+        setupOffsets()
 
         if (hasLocationPermission()) {
             fetchLocation()
@@ -111,6 +113,50 @@ class PrayerTimesActivity : AppCompatActivity() {
             Toast.makeText(this, "Son par défaut rétabli", Toast.LENGTH_SHORT).show()
         }
         updateAdhanLabel()
+    }
+
+    private fun setupOffsets() {
+        bindOffset("Fajr", binding.btnFajrMinus, binding.btnFajrPlus)
+        bindOffset("Dhouhr", binding.btnDhouhrMinus, binding.btnDhouhrPlus)
+        bindOffset("Asr", binding.btnAsrMinus, binding.btnAsrPlus)
+        bindOffset("Maghrib", binding.btnMaghribMinus, binding.btnMaghribPlus)
+        bindOffset("Isha", binding.btnIshaMinus, binding.btnIshaPlus)
+        binding.btnResetOffsets.setOnClickListener {
+            PrayerOffsets.reset(this)
+            updateOffsetLabels()
+            lastLocation?.let { computeTimes(it) }
+            PrayerNotificationScheduler.scheduleNext(this)
+            Toast.makeText(this, "Réglages Sénégal (Thiès) rétablis", Toast.LENGTH_SHORT).show()
+        }
+        updateOffsetLabels()
+    }
+
+    private fun bindOffset(
+        prayer: String,
+        minus: com.google.android.material.button.MaterialButton,
+        plus: com.google.android.material.button.MaterialButton
+    ) {
+        minus.setOnClickListener {
+            PrayerOffsets.set(this, prayer, PrayerOffsets.get(this, prayer) - 1)
+            updateOffsetLabels()
+            lastLocation?.let { computeTimes(it) }
+            PrayerNotificationScheduler.scheduleNext(this)
+        }
+        plus.setOnClickListener {
+            PrayerOffsets.set(this, prayer, PrayerOffsets.get(this, prayer) + 1)
+            updateOffsetLabels()
+            lastLocation?.let { computeTimes(it) }
+            PrayerNotificationScheduler.scheduleNext(this)
+        }
+    }
+
+    private fun updateOffsetLabels() {
+        fun txt(v: Int) = (if (v > 0) "+" else "") + v + " min"
+        binding.tvFajrOffset.text = txt(PrayerOffsets.get(this, "Fajr"))
+        binding.tvDhouhrOffset.text = txt(PrayerOffsets.get(this, "Dhouhr"))
+        binding.tvAsrOffset.text = txt(PrayerOffsets.get(this, "Asr"))
+        binding.tvMaghribOffset.text = txt(PrayerOffsets.get(this, "Maghrib"))
+        binding.tvIshaOffset.text = txt(PrayerOffsets.get(this, "Isha"))
     }
 
     private fun updateAdhanLabel() {
@@ -163,6 +209,7 @@ class PrayerTimesActivity : AppCompatActivity() {
     }
 
     private fun computeTimes(location: Location) {
+        lastLocation = location
         val coordinates = Coordinates(location.latitude, location.longitude)
         binding.tvLocation.text = String.format(
             Locale.FRANCE, "Position: %.3f°, %.3f°", location.latitude, location.longitude
@@ -177,31 +224,48 @@ class PrayerTimesActivity : AppCompatActivity() {
         val times = PrayerTimes(coordinates, dateComponents, params)
 
         val fmt = SimpleDateFormat("HH:mm", Locale.FRANCE).apply { timeZone = tz }
+
+        fun offset(prayer: String, date: Date): Date {
+            val c = Calendar.getInstance(tz)
+            c.time = date
+            c.add(Calendar.MINUTE, PrayerOffsets.get(this, prayer))
+            return c.time
+        }
+
+        val fajr = offset("Fajr", times.fajr)
+        val dhuhr = offset("Dhouhr", times.dhuhr)
+        val asr = offset("Asr", times.asr)
+        val maghrib = offset("Maghrib", times.maghrib)
+        val isha = offset("Isha", times.isha)
+
         val rows = listOf(
-            PrayerRow("Fajr", fmt.format(times.fajr), "Prière de l'aube", R.drawable.ic_prayer),
+            PrayerRow("Fajr", fmt.format(fajr), "Prière de l'aube", R.drawable.ic_prayer),
             PrayerRow("Chourouq", fmt.format(times.sunrise), "Lever du soleil", R.drawable.ic_prayer),
-            PrayerRow("Dhouhr", fmt.format(times.dhuhr), "Prière de midi", R.drawable.ic_prayer),
-            PrayerRow("Asr", fmt.format(times.asr), "Prière de l'après-midi", R.drawable.ic_prayer),
-            PrayerRow("Maghrib", fmt.format(times.maghrib), "Coucher du soleil", R.drawable.ic_prayer),
-            PrayerRow("Isha", fmt.format(times.isha), "Prière de la nuit", R.drawable.ic_prayer)
+            PrayerRow("Dhouhr", fmt.format(dhuhr), "Prière de midi", R.drawable.ic_prayer),
+            PrayerRow("Asr", fmt.format(asr), "Prière de l'après-midi", R.drawable.ic_prayer),
+            PrayerRow("Maghrib", fmt.format(maghrib), "Coucher du soleil", R.drawable.ic_prayer),
+            PrayerRow("Isha", fmt.format(isha), "Prière de la nuit", R.drawable.ic_prayer)
         )
         binding.recyclerView.adapter = PrayerAdapter(rows)
 
-        val next = nextPrayer(times, fmt, tz)
+        val next = nextPrayer(fajr, dhuhr, asr, maghrib, isha, fmt, tz)
         binding.tvNext.text = "Prochaine prière: ${next.first} à ${next.second}"
     }
 
-    private fun nextPrayer(times: PrayerTimes, fmt: SimpleDateFormat, tz: TimeZone): Pair<String, String> {
+    private fun nextPrayer(
+        fajr: Date, dhuhr: Date, asr: Date, maghrib: Date, isha: Date,
+        fmt: SimpleDateFormat, tz: TimeZone
+    ): Pair<String, String> {
         val now = Calendar.getInstance(tz).time
         val list = listOf(
-            "Fajr" to times.fajr,
-            "Dhouhr" to times.dhuhr,
-            "Asr" to times.asr,
-            "Maghrib" to times.maghrib,
-            "Isha" to times.isha
+            "Fajr" to fajr,
+            "Dhouhr" to dhuhr,
+            "Asr" to asr,
+            "Maghrib" to maghrib,
+            "Isha" to isha
         )
         list.firstOrNull { it.second.after(now) }?.let { return it.first to fmt.format(it.second) }
-        return "Fajr (demain)" to fmt.format(times.fajr)
+        return "Fajr (demain)" to fmt.format(fajr)
     }
 
     override fun onRequestPermissionsResult(

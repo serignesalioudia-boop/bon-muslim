@@ -58,19 +58,25 @@ object PrayerNotificationScheduler {
         val cal = Calendar.getInstance(tz)
         val today = PrayerTimes(coordinates, DateComponents(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH)), params)
         val now = cal.time
+        fun offset(prayer: String, date: Date): Date {
+            val c = Calendar.getInstance(tz)
+            c.time = date
+            c.add(Calendar.MINUTE, PrayerOffsets.get(context, prayer))
+            return c.time
+        }
         val candidates = listOf(
-            "Fajr" to today.fajr,
-            "Dhouhr" to today.dhuhr,
-            "Asr" to today.asr,
-            "Maghrib" to today.maghrib,
-            "Isha" to today.isha
+            "Fajr" to offset("Fajr", today.fajr),
+            "Dhouhr" to offset("Dhouhr", today.dhuhr),
+            "Asr" to offset("Asr", today.asr),
+            "Maghrib" to offset("Maghrib", today.maghrib),
+            "Isha" to offset("Isha", today.isha)
         )
         var next = candidates.firstOrNull { it.second.after(now) }
         if (next == null) {
             val cal2 = Calendar.getInstance(tz)
             cal2.add(Calendar.DAY_OF_YEAR, 1)
             val tmr = PrayerTimes(coordinates, DateComponents(cal2.get(Calendar.YEAR), cal2.get(Calendar.MONTH) + 1, cal2.get(Calendar.DAY_OF_MONTH)), params)
-            next = "Fajr" to tmr.fajr
+            next = "Fajr" to offset("Fajr", tmr.fajr)
         }
         scheduleAt(context, next.first, next.second)
     }
