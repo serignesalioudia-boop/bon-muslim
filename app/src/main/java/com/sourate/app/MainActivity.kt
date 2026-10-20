@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.title = "  Apprendre l'Islam"
+        supportActionBar?.title = "  BOM MUSLIM"
 
         binding.cardQuran.setOnClickListener {
             startActivity(Intent(this, QuranActivity::class.java))
