@@ -50,7 +50,7 @@ android {
     applicationVariants.all {
         outputs.all {
             val output = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
-            output.outputFileName = "BOM-MUSLIM-${name}-v${versionName}.apk"
+            output.outputFileName = "BON-MUSLIM-${name}-v${versionName}.apk"
         }
     }
 
